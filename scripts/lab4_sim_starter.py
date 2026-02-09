@@ -84,18 +84,18 @@ class RobotController:
 
         # Define PD controller for wall-following here
         ######### Your code starts here #########
-        # self.controller = PDController(
-        #     kP=0.6,
-        #     kD=0.1,
-        #     u_min=-0.8,
-        #     u_max=0.8
-        # )
-
-        self.controller = PController(
-            kP=0.3,
-            u_min=-0.6,
-            u_max=0.6
+        self.controller = PDController(
+            kP=0.6,
+            kD=0.1,
+            u_min=-0.8,
+            u_max=0.8
         )
+
+        # self.controller = PController(
+        #     kP=0.3,
+        #     u_min=-0.6,
+        #     u_max=0.6
+        # )
         ######### Your code ends here #########
 
         self.desired_distance = desired_distance  # Desired distance from the wall
