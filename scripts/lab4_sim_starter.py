@@ -92,9 +92,9 @@ class RobotController:
         )
 
         # self.controller = PController(
-        #     kP=0.3,
-        #     u_min=-0.6,
-        #     u_max=0.6
+        #     kP=0.4,
+        #     u_min=-2.84,
+        #     u_max=2.84
         # )
         ######### Your code ends here #########
 
@@ -125,7 +125,7 @@ class RobotController:
             err = self.ir_distance - self.desired_distance
             t = time()
             u = self.controller.control(err, t)
-            ctrl_msg.linear.x = 0.15
+            ctrl_msg.linear.x = 0.12
             ctrl_msg.angular.z = u
             ######### Your code ends here #########
 
