@@ -84,10 +84,16 @@ class RobotController:
         ######### Your code starts here #########
         self.controller = PDController(
             kP=0.4,
-            kD=0.1,
-            u_min=-0.6,
-            u_max=0.6
+            kD=2.0,
+            u_min=-2.84,
+            u_max=2.84
         )
+
+        # self.controller = PController(
+        #     kP=0.4,
+        #     u_min=-2.84,
+        #     u_max=2.84
+        # )
         ######### Your code ends here #########
 
         self.desired_distance = desired_distance  # Desired distance from the wall
@@ -117,10 +123,10 @@ class RobotController:
 
             # using PD controller, compute and send motor commands
             ######### Your code starts here #########
-            err = self.desired_distance - self.ir_distance
+            err = self.ir_distance - self.desired_distance
             t = time()
             u = self.controller.control(err, t)
-            ctrl_msg.linear.x = 0.10
+            ctrl_msg.linear.x = 0.12
             ctrl_msg.angular.z = u
             ######### Your code ends here #########
 
