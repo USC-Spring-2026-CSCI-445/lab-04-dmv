@@ -20,7 +20,7 @@ class PController:
         self.kP = kP
         self.u_min = u_min
         self.u_max = u_max
-        self.t_prev = time()
+        self.t_prev = 0
         ######### Your code ends here #########
 
     def control(self, err, t):
@@ -52,7 +52,7 @@ class PDController:
         self.u_min = u_min
         self.u_max = u_max
         self.err_prev = 0.0
-        self.t_prev = time()
+        self.t_prev = 0
         ######### Your code ends here #########
 
     def control(self, err, t):
@@ -81,18 +81,18 @@ class RobotController:
         self.robot_ctrl_pub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
 
         # Define PD controller for wall following here
-        ######### Your code starts here #########
+        ######## Your code starts here #########
         self.controller = PDController(
-            kP=0.4,
+            kP=1.5,
             kD=2.0,
-            u_min=-2.84,
-            u_max=2.84
+            u_min=-2.00,
+            u_max=2.00
         )
 
         # self.controller = PController(
-        #     kP=0.4,
-        #     u_min=-2.84,
-        #     u_max=2.84
+        #     kP=1.5,
+        #     u_min=-2.00,
+        #     u_max=2.00
         # )
         ######### Your code ends here #########
 
@@ -123,10 +123,10 @@ class RobotController:
 
             # using PD controller, compute and send motor commands
             ######### Your code starts here #########
-            err = self.ir_distance - self.desired_distance
+            err = self.ir_distance - self.desired_distance 
             t = time()
             u = self.controller.control(err, t)
-            ctrl_msg.linear.x = 0.12
+            ctrl_msg.linear.x = 0.08
             ctrl_msg.angular.z = u
             ######### Your code ends here #########
 
@@ -136,7 +136,7 @@ class RobotController:
 
 
 if __name__ == "__main__":
-    desired_distance = 0.4
+    desired_distance = 0.2
     controller = RobotController(desired_distance)
     try:
         controller.control_loop()
